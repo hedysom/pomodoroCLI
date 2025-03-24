@@ -11,13 +11,14 @@
 class Timer {
 private:
     int duration;
-    int remaining;
-    std::atomic<bool> is_paused;
-    std::atomic<bool> is_running;
+    int remaining = 0;
+    bool is_paused = false;
 public:
-
-
-
+    explicit Timer(int duration);
+    ~Timer()= default;
+    void start();
+    void pause();
+    void stop();
 };
 
 

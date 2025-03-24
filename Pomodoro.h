@@ -4,15 +4,17 @@
 
 #ifndef POMODOROCLI_POMODORO_H
 #define POMODOROCLI_POMODORO_H
-
+#include "Timer.h"
 
 class Pomodoro {
-
+private:
+    Timer timer = Timer(25);
 public:
-    static void startPomodoro();
-    static void pausePomodoro();
-    static void stopPomodoro();
-
+    Pomodoro()= default;
+    ~Pomodoro()= default;
+    void startPomodoro();
+    void pausePomodoro();
+    void stopPomodoro();
 };
 
 

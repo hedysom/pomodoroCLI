@@ -7,9 +7,9 @@ void innerSwitch();
 void input(char *);
 
 int main() {
-    // Pomodoro pomodoro = new Pomodoro();
+    Pomodoro pomodoro = * new Pomodoro();
     // Break break = new Break;
-    char outterChoise;
+    char outerChoise;
 
     std::cout << "**********************************************\n"
     << "Welcome to pomodoro timer\n" <<
@@ -18,12 +18,13 @@ int main() {
     "Pess 2 to EXIT\n" << std::endl;
 
     while(true){
-        std::cin.get(outterChoise);
-        // FLUSHINF STDIN SINCE THE \n remains in it and causes another read
+        std::cin.get(outerChoise);
+        // FLUSHING STDIN SINCE THE \n remains in it and causes another read
         std::cin.clear(); std::cin.ignore(INT_MAX,'\n');
-        switch(outterChoise){
+        switch(outerChoise){
             case '1':
                 println("Pomodoro started");
+                pomodoro.startPomodoro();
                 //innerSwitch();
                 break;
             case '2':
