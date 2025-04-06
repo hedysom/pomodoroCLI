@@ -10,16 +10,26 @@
 
 class Timer {
 private:
-    int duration;
-    int remaining = 0;
-    bool is_paused = false;
+    std::atomic_bool is_running = false;
+    std::atomic_int duration;
+    std::atomic_int remaining = 0;
+    std::atomic_bool is_paused = false;
+
 public:
     explicit Timer(int duration);
-    ~Timer()= default;
-    void start();
-    void pause();
-    void stop();
-};
 
+    ~Timer();
+
+    void start();
+
+    void pause();
+
+    void stop();
+
+    int getRemainingTime();
+
+    static void soundAlert();
+    static void clearScreen();
+};
 
 #endif //POMODOROCLI_TIMER_H

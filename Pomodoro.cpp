@@ -2,9 +2,12 @@
 // Created by hedysom on 24/03/25.
 //
 
+#include <ostream>
 #include "Pomodoro.h"
 
+
 void Pomodoro::startPomodoro(){
+    std::println("Pomodoro started");
     timer.start();
 }
 void Pomodoro::pausePomodoro(){
@@ -12,4 +15,4 @@ void Pomodoro::pausePomodoro(){
 }
 void Pomodoro::stopPomodoro(){
     timer.stop();
-}
+};

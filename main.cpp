@@ -1,13 +1,14 @@
 #include <iostream>
 #include "Pomodoro.h"
 #include "Break.h"
+#include <thread>
 
 void println(const std::string& string);
 void innerSwitch();
 void input(char *);
 
 int main() {
-    Pomodoro pomodoro = * new Pomodoro();
+    Pomodoro pomodoro;
     // Break break = new Break;
     char outerChoise;
 
@@ -23,7 +24,6 @@ int main() {
         std::cin.clear(); std::cin.ignore(INT_MAX,'\n');
         switch(outerChoise){
             case '1':
-                println("Pomodoro started");
                 pomodoro.startPomodoro();
                 //innerSwitch();
                 break;

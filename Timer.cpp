@@ -1,32 +1,83 @@
 //
 // Created by hedysom on 24/03/25.
 //
-#include <chrono>
 #include "Timer.h"
 #include <thread>
+#include <atomic>
 #include <iostream>
+
+// a generic timer that sleeps for 1 second, hence the duration specified should be in seconds
+// at the end of specified time it will sound the buzz 3 times
 
 Timer::Timer(int duration){
     this->duration = duration;
-    remaining = this->duration;
+    remaining.store(this->duration);
 }
 void Timer::start(){
     using namespace std::chrono_literals;
+    int elapsed = 0;
+    int progressBarWidth = 40;
     while(remaining > 0){
+        clearScreen();
+        // stop if paused
         if(is_paused)
             break;
-        std::this_thread::sleep_for(1min);
+
+        //print the progress bar
+        int progressChars = progressBarWidth * elapsed / duration;
+        std::cout << "[";
+        for (int i = 0; i < progressBarWidth; ++i) {
+            if (i < progressChars) std::cout << "=";
+            else std::cout << " ";
+        }
+        std::cout << "]" << std::endl;
+        //sleep
+        std::this_thread::sleep_for(1s);
+        elapsed++;
         remaining--;
-        std::cout << std::format("{} min remaining", remaining) << std::endl;
+    }
+
+    // Sound the alert 3 times
+    for (int i = 0; i < 3; ++i) {
+        soundAlert();
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 }
+
 void Timer::pause(){
     is_paused = true;
 }
+
 void Timer::stop(){
     duration = 0;
     remaining = 0;
 }
+
+int Timer::getRemainingTime(){
+    return this->remaining;
+}
+
+Timer::~Timer(){
+    this->stop();
+}
+
+void Timer::soundAlert(){
+    #ifdef _WIN32
+    std::cout << '\a'; // Bell character
+    #else
+    system("printf '\a'");
+    #endif
+}
+
+
+void Timer::clearScreen() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
 
 
 

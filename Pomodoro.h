@@ -8,7 +8,7 @@
 
 class Pomodoro {
 private:
-    Timer timer = Timer(25);
+    Timer timer = Timer(5 * 60);  // 25 mins multiplied by 60 to transform in seconds
 public:
     Pomodoro()= default;
     ~Pomodoro()= default;
